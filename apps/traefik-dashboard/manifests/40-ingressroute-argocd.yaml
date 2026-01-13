@@ -11,4 +11,7 @@ spec:
       kind: Rule
       services:
         - name: argocd-server
-          port: 80
+          port: 443
+          scheme: https
+          passHostHeader: true
+          serversTransport: argocd-transport
