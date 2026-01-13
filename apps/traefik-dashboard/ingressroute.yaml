@@ -12,5 +12,5 @@ spec:
       middlewares:
         - name: traefik-dashboard-basicauth
       services:
-        - name: traefik
-          port: 9000
+        - name: api@internal
+          kind: TraefikService
