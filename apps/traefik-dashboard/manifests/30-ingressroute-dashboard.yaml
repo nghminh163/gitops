@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.minh.pw`)
+    - match: Host(`traefik.local`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
       kind: Rule
       middlewares:
         - name: traefik-dashboard-basicauth
