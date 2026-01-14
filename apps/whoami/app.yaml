@@ -9,6 +9,7 @@ spec:
     repoURL: https://cowboysysop.github.io/charts
     chart: whoami
     targetRevision: 6.0.0
+    path: apps/whoami/manifests
     helm:
       valueFiles:
         - values.yaml
