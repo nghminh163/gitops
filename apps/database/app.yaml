@@ -6,13 +6,19 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: mariadb
-    targetRevision: 24.0.3
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    # Helm chart
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: mariadb
+      targetRevision: 24.0.3
+      helm:
+        valueFiles:
+          - values.yaml
+    # Manifests
+    - repoURL: git@github.com:nghminh163/gitops.git
+      targetRevision: main
+      path: apps/database/manifests
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
