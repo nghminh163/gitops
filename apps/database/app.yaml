@@ -18,6 +18,9 @@ spec:
     - repoURL: git@github.com:nghminh163/gitops.git
       targetRevision: main
       path: apps/database/manifests
+      directory:
+        recurse: true
+        include: "*/*.yaml"
       ref: values
 
   destination:
