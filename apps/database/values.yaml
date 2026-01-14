@@ -1,5 +1,7 @@
 architecture: standalone
 
+auth:
+  rootPassword: "1UfhkBfwRsWsZrtcw+ZCkQhuRA183JDUnHkLhYNnGno="
 primary:
   persistence:
     enabled: true
