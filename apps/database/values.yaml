@@ -1,0 +1,7 @@
+architecture: standalone
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 8Gi
