@@ -6,11 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    # Manifests
-    - repoURL: git@github.com:nghminh163/gitops.git
-      targetRevision: main
-      path: apps/vaultwarden/manifests
-      ref: values
+    repoURL: git@github.com:nghminh163/gitops.git
+    targetRevision: main
+    path: apps/vaultwarden/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: vaultwarden
