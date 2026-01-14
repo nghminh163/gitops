@@ -24,8 +24,5 @@ spec:
             - sh
             - -c
             - |
-              mariadb -h database-mariadb -u root <<'EOF'
-              CREATE DATABASE IF NOT EXISTS vaultwarden
-                CHARACTER SET utf8mb4
-                COLLATE utf8mb4_unicode_ci;
-              EOF
+              echo "Creating database vaultwarden..."
+              echo $(MYSQL_PWD)
