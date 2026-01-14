@@ -13,11 +13,4 @@ spec:
       services:
         - name: vaultwarden
           port: 80
-
-    # WebSocket notifications
-    - match: Host(`vault.minh.pw`) && PathPrefix(`/notifications/hub`)
-      kind: Rule
-      services:
-        - name: vaultwarden
-          port: 3012
   tls: {}
