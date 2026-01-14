@@ -5,14 +5,19 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://cowboysysop.github.io/charts
-    chart: whoami
-    targetRevision: 6.0.0
-    path: apps/whoami/manifests
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    # Helm chart
+    - repoURL: https://cowboysysop.github.io/charts
+      chart: whoami
+      targetRevision: 6.0.0
+      helm:
+        valueFiles:
+          - values.yaml
+    # Manifests
+    - repoURL: git@github.com:nghminh163/gitops.git
+      targetRevision: main
+      path: apps/whoami/manifests
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: whoami
