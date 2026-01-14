@@ -7,10 +7,8 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik-new.minh.pw`)
+    - match: Host(`traefik.minh.pw`)
       kind: Rule
-      middlewares:
-        - name: traefik-basicauth
       services:
         - name: api@internal
           kind: TraefikService
