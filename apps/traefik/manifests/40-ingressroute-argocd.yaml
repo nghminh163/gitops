@@ -5,9 +5,9 @@ metadata:
   namespace: argocd
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-    - match: Host(`argocd.local`)
+    - match: Host(`argo.minh.pw`)
       kind: Rule
       services:
         - name: argocd-server
