@@ -1,28 +1,28 @@
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: db-job-vaultwarden-01-create-vaultwarden-db
-  namespace: database
-  annotations:
-    argocd.argoproj.io/sync-wave: "5"
-spec:
-  backoffLimit: 3
-  ttlSecondsAfterFinished: 300
-  template:
-    spec:
-      restartPolicy: OnFailure
-      containers:
-        - name: mariadb-client
-          image: mariadb:latest
-          env:
-            - name: MYSQL_PWD
-              valueFrom:
-                secretKeyRef:
-                  name: database-mariadb
-                  key: mariadb-root-password
-          command:
-            - sh
-            - -c
-            - |
-              echo "Creating database vaultwarden..."
-              echo $(MYSQL_PWD)
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: db-job-vaultwarden-01-create-vaultwarden-db
+#   namespace: database
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "5"
+# spec:
+#   backoffLimit: 3
+#   ttlSecondsAfterFinished: 300
+#   template:
+#     spec:
+#       restartPolicy: OnFailure
+#       containers:
+#         - name: mariadb-client
+#           image: mariadb:latest
+#           env:
+#             - name: MYSQL_PWD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: database-mariadb
+#                   key: mariadb-root-password
+#           command:
+#             - sh
+#             - -c
+#             - |
+#               echo "Creating database vaultwarden..."
+#               echo $(MYSQL_PWD)

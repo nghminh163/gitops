@@ -1,9 +1,11 @@
 architecture: standalone
 
-auth:
-  rootPassword: "1UfhkBfwRsWsZrtcw+ZCkQhuRA183JDUnHkLhYNnGno="
+passwordUpdateJob:
+  enabled: true
+
 primary:
   persistence:
     enabled: true
     storageClass: local-path
     size: 8Gi
+
