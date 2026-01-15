@@ -1,0 +1,41 @@
+podSecurityContext:
+  fsGroup: 1000
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+
+service:
+  main:
+    ports:
+      http:
+        port: 8096
+
+persistence:
+  config:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    mountPath: /config
+  cache:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    mountPath: /cache
+
+extraVolumes:
+  - name: media
+    hostPath:
+      path: /mnt/media
+      type: Directory
+
+extraVolumeMounts:
+  - name: media
+    mountPath: /media
+    readOnly: true
+
+ingress:
+  main:
+    enabled: false

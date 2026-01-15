@@ -6,20 +6,18 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
-    chart: nfs-subdir-external-provisioner
-    targetRevision: "*"
-    helm:
-      values: |
-        nfs:
-          server: 192.168.1.55
-          path: /volume1/media
+  sources:
+    - repoURL: https://jellyfin.github.io/jellyfin-helm
+      chart: jellyfin
+      targetRevision: "*"
+      helm:
+        valueFiles:
+          - values.yaml
 
-        storageClass:
-          name: jellyfin-media
-          reclaimPolicy: Retain
-          accessModes: ReadWriteMany
+    - repoURL: git@github.com:nghminh163/gitops.git
+      targetRevision: main
+      path: apps/jellyfin/manifests
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
