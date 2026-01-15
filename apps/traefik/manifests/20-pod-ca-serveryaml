@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ca-server
+  namespace: kube-system
+spec:
+  containers:
+    - name: ca-server
+      image: ca-server:latest
+      imagePullPolicy: IfNotPresent
