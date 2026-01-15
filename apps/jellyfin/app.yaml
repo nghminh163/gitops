@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jellyfin-nfs-provisioner
+  name: jellyfin
   namespace: argocd
 spec:
   project: default
