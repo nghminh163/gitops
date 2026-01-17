@@ -3,9 +3,13 @@ kind: Service
 metadata:
   name: jellyfin
   namespace: jellyfin
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
+  type: ClusterIP
   selector:
-    app: jellyfin
+    app.kubernetes.io/instance: jellyfin
+    app.kubernetes.io/name: jellyfin
   ports:
     - name: http
       port: 8096
