@@ -2,11 +2,12 @@ persistence:
   config:
     enabled: true
     existingClaim: config
+    mountPath: /config
 
-  # media:
-  #   enabled: true
-  #   existingClaim: media
-  #   mountPath: /media
+  media:
+    enabled: true
+    existingClaim: media
+    mountPath: /media
 
   cache:
     enabled: true
