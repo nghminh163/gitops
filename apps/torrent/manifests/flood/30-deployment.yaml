@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flood
+  namespace: torrent
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: flood
+  template:
+    metadata:
+      labels:
+        app: flood
+    spec:
+      containers:
+        - name: flood
+          image: jesec/flood:latest
+          imagePullPolicy: IfNotPresent
+
+          # Flood listen 3000
+          ports:
+            - name: http
+              containerPort: 3000
+
+          env:
+            - name: QB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flood-qb
+                  key: QB_USER
+            - name: QB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: flood-qb
+                  key: QB_PASS
+
+          args:
+            - --auth=none
+            - --qburl=http://qbittorrent:8090
+            - --qbuser=$(QB_USER)
+            - --qbpass=$(QB_PASS)
+
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: data
+              mountPath: /data
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: flood-config
+
+        - name: data
+          persistentVolumeClaim:
+            claimName: qbittorrent-data
+
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+            type: File

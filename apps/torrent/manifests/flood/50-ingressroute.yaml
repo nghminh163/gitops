@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flood
+  namespace: torrent
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`flood.minh.pw`)
+      kind: Rule
+      services:
+        - name: flood
+          port: 3000
