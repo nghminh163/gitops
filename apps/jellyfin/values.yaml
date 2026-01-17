@@ -1,3 +1,9 @@
+service:
+  enabled: false
+
+ingress:
+  enabled: false
+
 persistence:
   config:
     enabled: true
