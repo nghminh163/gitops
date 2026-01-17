@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent
-  namespace: qbittorrent
+  name: torrent
+  namespace: torrent
 spec:
   selector:
     app: qbittorrent

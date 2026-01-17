@@ -35,6 +35,11 @@ spec:
               value: "002"
             - name: WEBUI_PORTS
               value: "8090/tcp,8090/udp"
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            allowPrivilegeEscalation: false
           ports:
             - name: http
               containerPort: 8090
@@ -44,11 +49,6 @@ spec:
               mountPath: /config
             - name: data
               mountPath: /data
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
 
       volumes:
         - name: config
