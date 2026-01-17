@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: torrent
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: service-node
+
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+
+      containers:
+        - name: qbittorrent
+          image: ghcr.io/hotio/qbittorrent:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK
+              value: "002"
+            - name: WEBUI_PORTS
+              value: "8090/tcp,8090/udp"
+          ports:
+            - name: http
+              containerPort: 8090
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: data
+              mountPath: /data
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: qbittorrent-data
