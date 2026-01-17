@@ -12,7 +12,7 @@ spec:
       targetRevision: "*"
       helm:
         valueFiles:
-          - values.yaml
+          - $values/apps/jellyfin/values.yaml
 
     - repoURL: git@github.com:nghminh163/gitops.git
       targetRevision: main
