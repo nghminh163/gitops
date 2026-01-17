@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: qbittorrent
+  name: torrent
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: git@github.com:nghminh163/gitops.git
     targetRevision: main
-    path: apps/qbittorrent/manifests
+    path: apps/torrent/manifests
     directory:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: qbittorrent
+    namespace: torrent
   syncPolicy:
     automated:
       prune: true
