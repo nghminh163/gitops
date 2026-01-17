@@ -12,5 +12,5 @@ spec:
     - match: Host(`jellyfin.minh.pw`)
       kind: Rule
       services:
-        - name: jellyfin
+        - name: jellyfin-svc
           port: 8096
