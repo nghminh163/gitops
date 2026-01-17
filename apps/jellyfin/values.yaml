@@ -7,12 +7,12 @@ ingress:
 persistence:
   config:
     enabled: true
-    existingClaim: config
+    existingClaim: jellyfin-config
     mountPath: /config
 
   media:
     enabled: true
-    existingClaim: media
+    existingClaim: jellyfin-media
     mountPath: /media
 
   cache:
