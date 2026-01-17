@@ -1,19 +1,12 @@
-service:
-  enabled: false
-
-ingress:
-  enabled: false
-
 persistence:
   config:
     enabled: true
-    existingClaim: jellyfin-config
-    mountPath: /config
+    existingClaim: config
 
-  media:
-    enabled: true
-    existingClaim: jellyfin-media
-    mountPath: /media
+  # media:
+  #   enabled: true
+  #   existingClaim: media
+  #   mountPath: /media
 
   cache:
     enabled: true
