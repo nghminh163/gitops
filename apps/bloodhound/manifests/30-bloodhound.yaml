@@ -51,7 +51,7 @@ spec:
 
             # Connection strings (compose mẫu dùng format này) :contentReference[oaicite:6]{index=6}
             - name: bhe_database_connection
-              value: "user=bloodhound password=$(POSTGRES_PASSWORD) dbname=bloodhound host=app-db"
+              value: "user=bloodhound password=$(POSTGRES_PASSWORD) dbname=bloodhound host=app-db sslmode=disable"
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
