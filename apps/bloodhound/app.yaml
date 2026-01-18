@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bloodhound
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:nghminh163/gitops.git
+    targetRevision: main
+    path: apps/bloodhound/manifests
+    directory:
+      recurse: true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bloodhound
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bloodhound
+  namespace: bloodhound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`bloodhound.minh.pw`)
+      kind: Rule
+      services:
+        - name: bloodhound
+          port: 8080
