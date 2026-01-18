@@ -6,12 +6,21 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: git@github.com:nghminh163/gitops.git
-    targetRevision: main
-    path: apps/bloodhound/manifests
-    directory:
-      recurse: true
+  sources:
+    - repoURL: https://github.com/SpecterOps/BloodHound.git
+      targetRevision: main
+      path: examples/helm
+      helm:
+        releaseName: bloodhound-ce
+        valueFiles:
+          - $values/apps/bloodhound/values.yaml
+
+    # - repoURL: git@github.com:nghminh163/gitops.git
+    #   targetRevision: main
+    #   path: apps/bloodhound/manifests
+    #   directory:
+    #     recurse: true
+    #   ref: values
 
   destination:
     server: https://kubernetes.default.svc

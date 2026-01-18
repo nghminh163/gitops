@@ -1,0 +1,101 @@
+namespace: bloodhound
+
+appdb:
+  name: postgres
+  replicas: 1
+  appName: postgres
+  container:
+    name: postgres
+    image: docker.io/library/postgres:16
+    env:
+      POSTGRES_USER: "bloodhound"
+      POSTGRES_PASSWORD: "bloodhoundcommunityedition"
+      POSTGRES_DB: "bloodhound"
+    ports:
+      containerPort: 5432
+  livenessProbe:
+    user: bloodhound
+    database: bloodhound
+    port: "5432"
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5
+  service:
+    enabled: true
+    name: app-db
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+  volumes:
+    pvcEnabled: false
+    persistentVolumeClaim:
+      claimName: bloodhound-postgres-pvc
+      size: "1Gi"  # Configurable storage size
+
+graphdb:
+  name: graphdb
+  replicas: 1
+  appName: graphdb
+  container:
+    name: neo4j
+    image: docker.io/library/neo4j:4.4.42
+    env:
+      NEO4J_AUTH_USER: "neo4j"
+      NEO4J_AUTH_PASS: "bloodhoundcommunityedition"
+      NEO4J_dbms_allow__upgrade: "true"
+    ports:
+      - containerPort: 7687
+      - containerPort: 7474
+  service:
+    enabled: true
+    name: graph-db
+    type: ClusterIP
+    ports:
+      - name: graphdb
+        protocol: TCP
+        port: 7687
+        targetPort: 7687
+      - name: http
+        protocol: TCP
+        port: 7474
+        targetPort: 7474
+  livenessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5
+  volumes:
+    pvcEnabled: false
+    persistentVolumeClaim:
+      claimName: graphdb-neo4j-data-pvc
+      size: "1Gi"  
+  ingress:
+    enabled: false
+
+bloodhound:
+  name: bloodhound
+  replicas: 1
+  appName: bloodhound
+  container:
+    name: bloodhound
+    image: docker.io/specterops/bloodhound
+    version: latest
+    env:
+      bhe_disable_cypher_complexity_limit: "false"
+      bhe_enable_cypher_mutations: "false"
+      bhe_graph_query_memory_limit: "2"
+      bhe_graph_driver: "neo4j"
+    ports:
+      - containerPort: 8080
+      - containerPort: 2112
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+  ingress:
+    enabled: false
+  configMap:
+    enabled: true
+    name: bloodhound-config
