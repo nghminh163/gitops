@@ -15,12 +15,12 @@ spec:
         valueFiles:
           - $values/apps/bloodhound/values.yaml
 
-    # - repoURL: git@github.com:nghminh163/gitops.git
-    #   targetRevision: main
-    #   path: apps/bloodhound/manifests
-    #   directory:
-    #     recurse: true
-    #   ref: values
+    - repoURL: git@github.com:nghminh163/gitops.git
+      targetRevision: main
+      path: apps/bloodhound/manifests
+      directory:
+        recurse: true
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
