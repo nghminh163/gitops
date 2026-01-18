@@ -7,9 +7,9 @@ spec:
   project: default
 
   sources:
-    - repoURL: https://github.com/SpecterOps/BloodHound.git
+    - repoURL: git@github.com:nghminh163/gitops.git
       targetRevision: main
-      path: examples/helm
+      path: apps/bloodhound/chart
       helm:
         releaseName: bloodhound-ce
         valueFiles:
