@@ -7,6 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   entryPoints:
+    - web
     - websecure
   routes:
     - match: Host(`jellyfin.minh.pw`)
