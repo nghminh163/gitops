@@ -13,3 +13,6 @@ persistence:
     enabled: true
     type: emptyDir
     mountPath: /cache
+
+service:
+  type: NodePort
