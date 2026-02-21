@@ -1,0 +1,48 @@
+# IngressRoute Traefik Dashboard
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`traefik.minh.pw`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+---
+# IngressRoute ArgoCD
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`argo.minh.pw`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 80
+          passHostHeader: true
+# ---
+# # IngressRoute CA Server
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: ca-server
+#   namespace: kube-system
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - match: Host(`ca.minh.pw`)
+#       kind: Rule
+#       services:
+#         - name: ca-server
+#           port: 80
