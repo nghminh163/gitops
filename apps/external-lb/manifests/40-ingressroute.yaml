@@ -1,0 +1,16 @@
+# Ingress Route for synology-dsm
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: synology-dsm
+  namespace: external-lb
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`synology.minh.pw`)
+      kind: Rule
+      services:
+        - name: synology-dsm
+          port: 5001
+  tls: {}
