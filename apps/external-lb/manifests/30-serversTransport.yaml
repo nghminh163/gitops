@@ -1,0 +1,8 @@
+# Bypass verify SSL for synology (over HTTPS)
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: synology-insecure-transport
+  namespace: external-lb
+spec:
+  insecureSkipVerify: true
