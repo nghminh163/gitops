@@ -23,3 +23,16 @@ spec:
     - name: adguard
       port: 3000
       targetPort: 3000
+---
+# Router Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: router
+  namespace: external-lb
+spec:
+  clusterIP: None
+  ports:
+    - name: router
+      port: 80
+      targetPort: 80

@@ -23,3 +23,16 @@ subsets:
     ports:
       - name: adguard
         port: 3000
+---
+# Router Endpoints
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: router
+  namespace: external-lb
+subsets:
+  - addresses:
+      - ip: 192.168.1.1
+    ports:
+      - name: router
+        port: 80
