@@ -17,3 +17,21 @@ spec:
           passHostHeader: false
           serversTransport: synology-insecure-transport
   tls: {}
+---
+# Ingress Route for adguard
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: adguard
+  namespace: external-lb
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`adguard.minh.pw`)
+      kind: Rule
+      services:
+        - name: adguard
+          port: 3000
+          passHostHeader: false
+  tls: {}
