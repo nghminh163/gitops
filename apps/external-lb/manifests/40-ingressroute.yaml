@@ -13,4 +13,7 @@ spec:
       services:
         - name: synology-dsm
           port: 5001
+          scheme: https
+          passHostHeader: false
+          serversTransport: synology-insecure-transport
   tls: {}
