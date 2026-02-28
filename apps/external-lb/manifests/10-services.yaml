@@ -36,3 +36,16 @@ spec:
     - name: router
       port: 80
       targetPort: 80
+---
+# VM Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: vm
+  namespace: external-lb
+spec:
+  clusterIP: None
+  ports:
+    - name: https-vm
+      port: 443
+      targetPort: 443

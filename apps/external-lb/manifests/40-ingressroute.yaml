@@ -15,7 +15,7 @@ spec:
           port: 5001
           scheme: https
           passHostHeader: false
-          serversTransport: synology-insecure-transport
+          serversTransport: insecure-transport
   tls: {}
 ---
 # Ingress Route for Adguard
@@ -52,4 +52,24 @@ spec:
         - name: router
           port: 80
           passHostHeader: false
+  tls: {}
+---
+# Ingress Route for synology-dsm
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vm
+  namespace: external-lb
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`vm.minh.pw`)
+      kind: Rule
+      services:
+        - name: vm
+          port: 443
+          scheme: https
+          passHostHeader: false
+          serversTransport: insecure-transport
   tls: {}
